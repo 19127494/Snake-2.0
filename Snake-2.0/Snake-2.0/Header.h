@@ -49,8 +49,8 @@ public:
 	}
 	~Bait() {}
 
-	void randBait();
-	void performBait();
+	void randBait(bool fl);
+	void performBait(bool fl);
 	void deleteBait();
 };
 
@@ -93,5 +93,5 @@ public:
 		sh.setY(y);
 	}
 };
-
+void menu();
 #endif

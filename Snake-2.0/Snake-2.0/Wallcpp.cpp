@@ -3,7 +3,7 @@
 
 Wall::Wall()
 {
-	width = 70;
+	width = 60;
 	height = 20;
 }
 Wall::Wall(int W, int H)
