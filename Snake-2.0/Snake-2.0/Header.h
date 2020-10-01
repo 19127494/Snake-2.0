@@ -89,6 +89,4 @@ public:
 	void move();
 };
 
-
-
 #endif

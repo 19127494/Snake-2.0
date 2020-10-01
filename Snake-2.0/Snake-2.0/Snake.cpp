@@ -1,6 +1,8 @@
 #include "Header.h"
 #include "Dh.h";
 
+char previp = 'd';
+
 void PointSnake::performPointSnake(const bool& a) {
 	gotoXY(x, y);
 	if (a == 1)
@@ -32,7 +34,10 @@ void Snake::performSnake()  {
 
 void Snake::moveSnakeHead() {
 	int prevX = sh.getX(), prevY = sh.getY();
-	switch (_getch())
+	if (_kbhit()) {
+		previp = _getch();
+	}
+	switch (previp)
 	{
 	case 'w':
 		sh.setY(sh.getY() - 1);
