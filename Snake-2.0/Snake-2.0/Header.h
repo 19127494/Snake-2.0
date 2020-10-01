@@ -8,7 +8,7 @@
 #include <ctime>
 using namespace std;
 
-void gamePlay();
+bool gamePlay(int speed,int &score, int mode);
 class Wall
 {
 protected:
@@ -83,13 +83,15 @@ public:
 	void moveSnake();
 
 	bool eatSelf();
-};
 
-class P_Snake : public Point
-{
-public:
-	P_Snake() { x = 1; y = 1; }
-	void move();
+	void setHX(int x)
+	{
+		sh.setX(x);
+	}
+	void setHY(int y)
+	{
+		sh.setY(y);
+	}
 };
 
 #endif
