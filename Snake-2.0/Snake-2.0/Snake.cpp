@@ -1,6 +1,8 @@
 #include "Header.h"
 #include "Dh.h";
 
+int prevX, prevY;
+int prevXb, prevYb;
 char previp = 'd';
 
 void PointSnake::performPointSnake(const bool& a) {
@@ -11,29 +13,28 @@ void PointSnake::performPointSnake(const bool& a) {
 		cout << "o";
 }
 
+void PointSnake::deletePointSnake() {
+	gotoXY(x, y);
+	cout << " ";
+}
+
 Snake::Snake() {
 	sh.setX(30);
 	sh.setY(10);
 	sp_arr.resize(0);
 }
 
-Snake::~Snake() {
-	/*if (!sp_arr.empty())
-		for (vector<PointSnake*>::iterator it = sp_arr.begin(); it != sp_arr.end(); it++)
-			if ((*it) != NULL)
-				delete (*it);*/
-}
-
-void Snake::addSnakePart(PointSnake ps) {
+void Snake::addSnakePart() {
+	PointSnake ps;
+	if (sp_arr.empty()) {
+		ps.setX(sh.getX());
+		ps.setY(sh.getY());
+	}
 	sp_arr.push_back(ps);
 }
 
-void Snake::performSnake()  {
-	sh.performPointSnake(1);
-}
-
 void Snake::moveSnakeHead() {
-	int prevX = sh.getX(), prevY = sh.getY();
+	prevX = sh.getX(), prevY = sh.getY();
 	if (_kbhit()) {
 		previp = _getch();
 	}
@@ -56,5 +57,38 @@ void Snake::moveSnakeHead() {
 	}
 	gotoXY(prevX, prevY);
 	cout << " ";
-	performSnake();
+	sh.performPointSnake(1);
+}
+
+void Snake::moveSnake() {
+	bool flag = false;
+	moveSnakeHead();
+	if (!sp_arr.empty())
+		for (vector<PointSnake>::iterator it = sp_arr.begin(); it != sp_arr.end(); it++) {
+			(*it).deletePointSnake();
+			if (flag == true) {
+				prevX = (*it).getX();
+				prevY = (*it).getY();
+				(*it).setX(prevXb);
+				(*it).setY(prevYb);
+				flag = false;
+			}
+			else {
+				prevXb = (*it).getX();
+				prevYb = (*it).getY();
+				(*it).setX(prevX);
+				(*it).setY(prevY);
+				flag = true;
+			}
+			(*it).performPointSnake(0);
+		}
+}
+
+bool Snake::eatSelf() {
+	if (!sp_arr.empty())
+		for (vector<PointSnake>::iterator it = sp_arr.begin(); it != sp_arr.end(); it++) {
+			if ((*it).getX() == sh.getX() && (*it).getY() == sh.getY())
+				return true;
+		}
+	return false;
 }

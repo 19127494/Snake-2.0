@@ -64,6 +64,7 @@ public:
 	~PointSnake() {}
 
 	void performPointSnake(const bool&);
+	void deletePointSnake();
 };
 
 class Snake {
@@ -72,14 +73,16 @@ private:
 	vector<PointSnake> sp_arr;
 public:
 	Snake();
-	~Snake();
+	~Snake() {}
 
-	void addSnakePart(PointSnake);
+	void addSnakePart();
 
 	int getSnakeHeadX() { return sh.getX();	}
 	int getSnakeHeadY() { return sh.getY(); }
-	void performSnake();
 	void moveSnakeHead();
+	void moveSnake();
+
+	bool eatSelf();
 };
 
 class P_Snake : public Point
