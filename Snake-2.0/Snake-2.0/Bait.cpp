@@ -3,8 +3,8 @@
 
 void Bait::randBait(bool fl) {
 	srand(time(NULL));
-	x = rand() % 60 + 1;
-	y = rand() % 20 + 1;
+	x = rand() % 59 + 1;
+	y = rand() % 19 + 1;
 	performBait(fl);
 }
 
