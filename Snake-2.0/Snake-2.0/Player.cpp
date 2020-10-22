@@ -60,6 +60,7 @@ void menu()
 	while (true)
 	{
 		system("cls");
+		SetColor(15);
 		cout << "\t\t\t\t  Move like a snake, eat like a snake! \n";
 		cout << " \n\t\t\t\t\t1 to start\n";
 		cout << " \t\t\t\t\t2 to use"; SetColor(4); cout << " ''HACK MODE''\n"; SetColor(15);
